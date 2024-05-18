@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ValidationException extends RuntimeException{
+public class FieldValidationException extends RuntimeException{
 
     private String message;
 }

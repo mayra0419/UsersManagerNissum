@@ -10,8 +10,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({ValidationException.class})
-    public ResponseEntity<Object> handleException(ValidationException ex, WebRequest request) {
+    @ExceptionHandler({FieldValidationException.class})
+    public ResponseEntity<Object> handleException(FieldValidationException ex, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setMessage(ex.getMessage());
         return ResponseEntity.badRequest().body(errorResponse);

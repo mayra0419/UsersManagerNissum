@@ -21,7 +21,7 @@ public class Phone {
     private String number;
     @Column(name = "citycode")
     private String citycode;
-    @Column(name = "contrycode")
-    private String contrycode;
+    @Column(name = "countrycode")
+    private String countrycode;
 
 }
