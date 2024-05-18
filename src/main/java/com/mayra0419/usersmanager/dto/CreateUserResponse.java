@@ -1,19 +1,23 @@
 package com.mayra0419.usersmanager.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
-@Setter
+@Builder
 public class CreateUserResponse {
 
     private String id;
 
-    private String created;
+    private LocalDateTime created;
 
-    private String modified;
+    private LocalDateTime modified;
 
     private String token;
 
-    private String isactive;
+    @JsonProperty("isActive")
+    private boolean active;
 }

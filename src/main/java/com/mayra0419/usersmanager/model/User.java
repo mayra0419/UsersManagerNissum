@@ -1,15 +1,15 @@
 package com.mayra0419.usersmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,8 +22,7 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @UuidGenerator
     private UUID id;
 
     @Column(name = "name")
@@ -35,17 +34,22 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @Column(name = "authToken", columnDefinition="TEXT")
+    private String token;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Phone> phones;
 
+    @Column(name = "created")
     private LocalDateTime created;
 
+    @Column(name = "modified")
     private LocalDateTime modified;
 
+    @Column(name = "lastLogin")
     private LocalDateTime lastLogin;
 
-    private String token;
-
-    private boolean isActive;
+    @Column(name = "active")
+    private boolean active;
 }
