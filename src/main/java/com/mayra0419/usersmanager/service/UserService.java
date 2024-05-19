@@ -2,14 +2,14 @@ package com.mayra0419.usersmanager.service;
 
 
 import com.mayra0419.usersmanager.Constants;
-import com.mayra0419.usersmanager.dto.CreateUserRequest;
-import com.mayra0419.usersmanager.dto.CreateUserResponse;
-import com.mayra0419.usersmanager.dto.PhoneDTO;
 import com.mayra0419.usersmanager.dto.mapper.UserMapper;
 import com.mayra0419.usersmanager.exception.FieldValidationException;
 import com.mayra0419.usersmanager.model.Phone;
 import com.mayra0419.usersmanager.model.User;
 import com.mayra0419.usersmanager.repository.UserRepository;
+import com.mayra0419.usersmanager.swagger.model.UserPost200Response;
+import com.mayra0419.usersmanager.swagger.model.UserPostRequest;
+import com.mayra0419.usersmanager.swagger.model.UserPostRequestPhonesInner;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +36,7 @@ public class UserService {
         PASSWORD_VALIDATION_PATTERN = Pattern.compile(passwordValidationRegex);
     }
 
-    public CreateUserResponse createUser(CreateUserRequest request) {
+    public UserPost200Response createUser(UserPostRequest request) {
         //Fields validation
         checkEmail(request.getEmail());
         checkPassword(request.getPassword());
@@ -67,7 +67,7 @@ public class UserService {
         }
     }
 
-    private User buildUser(CreateUserRequest request) {
+    private User buildUser(UserPostRequest request) {
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
@@ -83,12 +83,12 @@ public class UserService {
         return user;
     }
 
-    private List<Phone> buildPhones(List<PhoneDTO> phonesDto) {
+    private List<Phone> buildPhones(List<UserPostRequestPhonesInner> phonesDto) {
         List<Phone> phones = new ArrayList<>();
         if (phonesDto != null && !phonesDto.isEmpty()) {
             phones.addAll(
                     phonesDto.stream()
-                            .map((PhoneDTO phoneDto) -> new Phone(phoneDto.getNumber(), phoneDto.getCitycode(), phoneDto.getCountrycode()))
+                            .map((UserPostRequestPhonesInner phoneDto) -> new Phone(phoneDto.getNumber(), phoneDto.getCitycode(), phoneDto.getCountrycode()))
                             .toList());
 
         }

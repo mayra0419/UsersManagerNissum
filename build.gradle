@@ -2,10 +2,40 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id 'org.openapi.generator' version '7.5.0'
 }
 
 group = 'com.mayra0419'
 version = '0.0.1-SNAPSHOT'
+
+openApiGenerate {
+	generatorName = "spring"
+	inputSpec = "$rootDir/src/main/resources/swagger.yml"
+	outputDir = "$buildDir/generated"
+	apiPackage = "com.mayra0419.usersmanager.swagger"
+	modelPackage = "com.mayra0419.usersmanager.swagger.model"
+	configOptions = [
+			library: "spring-boot",
+			interfaceOnly: "true",
+			serviceInterface: "false",
+			useSpringBoot3: "true",
+			documentationProvider: "none",
+			useBeanValidation: "false",
+			openApiNullable: "false"
+	]
+}
+
+sourceSets {
+	main {
+		java.srcDirs += "$buildDir/generated/src/main/java"
+	}
+}
+
+tasks {
+	compileJava {
+		dependsOn("openApiGenerate")
+	}
+}
 
 java {
 	sourceCompatibility = '17'
@@ -35,8 +65,4 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
 }

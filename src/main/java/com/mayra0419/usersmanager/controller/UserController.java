@@ -1,11 +1,10 @@
 package com.mayra0419.usersmanager.controller;
 
-import com.mayra0419.usersmanager.dto.CreateUserRequest;
-import com.mayra0419.usersmanager.dto.CreateUserResponse;
 import com.mayra0419.usersmanager.service.UserService;
+import com.mayra0419.usersmanager.swagger.UserApi;
+import com.mayra0419.usersmanager.swagger.model.UserPost200Response;
+import com.mayra0419.usersmanager.swagger.model.UserPostRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +12,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController implements UserApi {
 
     private final UserService userService;
 
@@ -21,9 +20,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
-    public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserRequest request) {
-        CreateUserResponse response = userService.createUser(request);
+
+    @Override
+    public ResponseEntity<UserPost200Response> userPost(UserPostRequest userPostRequest) {
+        UserPost200Response response = userService.createUser(userPostRequest);
         URI userLocation = URI.create(String.format("/user/%s", response.getId()));
         return ResponseEntity.created(userLocation).body(response);
     }
