@@ -57,8 +57,10 @@ public class UserServiceImpl implements UserService {
         if (userId == null || userId.isEmpty()) {
             throw new FieldValidationException("User id required");
         }
-
-        Optional<User> user = userRepository.findById(UUID.fromString(userId));
+        Optional<User> user = Optional.empty();
+        if (Constants.UUID_REGEX.matcher(userId).matches()) {
+            user = userRepository.findById(UUID.fromString(userId));
+        }
         return user.map(UserMapper::mapToUserResponse).orElse(null);
     }
 

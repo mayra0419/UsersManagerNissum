@@ -57,7 +57,9 @@ public class UserController {
                             schema = @Schema(implementation = UserResponse.class))}),
             @ApiResponse(responseCode = "404", description = "Not Found")})
     @GetMapping("/{userId}")
-    public ResponseEntity<UserResponse> getUserById(@PathVariable String userId) {
+    public ResponseEntity<UserResponse> getUserById(
+            @Parameter(name = "userId", description = "user identifier in uuid format")
+            @PathVariable String userId) {
         UserResponse response = userService.getUserById(userId);
         if (response == null) {
             return ResponseEntity.notFound().build();
