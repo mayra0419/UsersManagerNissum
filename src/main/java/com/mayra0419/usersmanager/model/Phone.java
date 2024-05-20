@@ -1,10 +1,17 @@
 package com.mayra0419.usersmanager.model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Entity
 @Setter
@@ -16,9 +23,10 @@ public class Phone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    //@ManyToOne
-    //@JoinColumn(name = "users_id")
-    //private User user;
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "user_id")
+    private User user;
     @Column(name = "number")
     private String number;
     @Column(name = "citycode")
@@ -26,7 +34,8 @@ public class Phone {
     @Column(name = "countrycode")
     private String countrycode;
 
-    public Phone(String number, String citycode, String countrycode) {
+    public Phone(User user, String number, String citycode, String countrycode) {
+        this.user = user;
         this.number = number;
         this.citycode = citycode;
         this.countrycode = countrycode;
