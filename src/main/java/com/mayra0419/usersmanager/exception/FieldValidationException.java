@@ -7,5 +7,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class FieldValidationException extends RuntimeException{
 
-    private String message;
+    private final String message;
 }

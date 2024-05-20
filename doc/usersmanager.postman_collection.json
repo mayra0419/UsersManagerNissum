@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "0fced8ef-f447-4317-97c8-067ffe3a86c2",
+		"name": "NissumChallenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4407234"
+	},
+	"item": [
+		{
+			"name": "UserManager",
+			"item": [
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"pepe\",\n    \"email\": \"pepe@test.com\",\n    \"password\": \"Pepe1035#\",\n    \"phones\":[\n        {\n            \"number\": \"123\",\n            \"citycode\": \"34\",\n            \"countrycode\": \"57\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/4905eb58-e5a2-4712-a893-fd8d24b69900",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"4905eb58-e5a2-4712-a893-fd8d24b69900"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
