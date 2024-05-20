@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse getUserById(String userId) {
-        if (userId == null || userId.isEmpty()) {
+        if (userId == null || userId.trim().isEmpty()) {
             throw new FieldValidationException("User id required");
         }
         Optional<User> user = Optional.empty();
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
         return user.map(UserMapper::mapToUserResponse).orElse(null);
     }
 
-    public void checkEmail(String email) {
+    private void checkEmail(String email) {
         if (email == null) {
             throw new FieldValidationException("Invalid email");
         }
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public void checkPassword(String password) {
+    private void checkPassword(String password) {
         if (password == null) {
             throw new FieldValidationException("Invalid password");
         }
