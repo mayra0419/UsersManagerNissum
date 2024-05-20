@@ -16,10 +16,10 @@ Technical test for selection process in Nissum, RESTful API for users creation.
 6. [H2 Database](#h2-database)
 7. [Access to Swagger](#access-to-swagger)
 8. [Test from Postman](#test-from-postman)
-9. [Test to Endpoints](#test-to-endpoints)
+9. [DB Diagram](#db-diagram)
 10. [Solution Diagram ](#Solution-Diagram)
 
-### Description
+### 1. Description
 
 This API for user creation, allows us adding new users the form RESTFul, with the use of Design Patterns, 
 good practices, principles of the REST architecture and JSON format.
@@ -33,11 +33,13 @@ good practices, principles of the REST architecture and JSON format.
 - Swagger v3
 - Lombok
 - H2 Database
+- Junit 5
+- Mockito
 - GIT
 
-### Requirements
+### 2. Requirements
 
-#### Password policy
+#### 2.1 Password policy
 
 The current password validation consider the following rules:
 
@@ -47,7 +49,7 @@ The current password validation consider the following rules:
 - There must be at least one of the special characters listed ($@#%&!).
 - There must be at least 8 characters long.
 
-#### Email policy
+#### 2.2 Email policy
 
 The email must have the next regular expression: aaaaaaa@dominio.cl
 
@@ -55,7 +57,7 @@ The email must have the next regular expression: aaaaaaa@dominio.cl
 - The domain can have letters, numbers and the signs: .-
 - The mail should not be too long
 
-### Configuration
+### 3. Configuration
 
 1. Clone the repository in your local machine
 
@@ -68,7 +70,7 @@ The email must have the next regular expression: aaaaaaa@dominio.cl
 
         SDK 17.0.10
 
-### Run from IntelliJ IDEA
+### 4. Run from IntelliJ IDEA
 
 1. Open IntelliJ IDEA.
 2. Select "File" from the menu bar and then "Open".
@@ -77,7 +79,7 @@ The email must have the next regular expression: aaaaaaa@dominio.cl
 5. Navigate to the main class UsersApplication.
 6. Right-click on the main class and select "Run" to run the application.
 
-### Run from the Console
+### 5. Run from the Console
 
 1. Run the following command to build the project and generate the JAR:
    ```bash
@@ -91,7 +93,7 @@ The email must have the next regular expression: aaaaaaa@dominio.cl
    ```bash
    java -jar usersmanager-0.0.1-SNAPSHOT.jar
 
-### H2 Database
+### 6. H2 Database
 
 The application use in-memory database, his structure is created following the jpa convention in code through annotations in the model folder.
 
@@ -101,7 +103,7 @@ You can access the H2 database administration console while the application is r
    ```bash
    http://localhost:8080/h2-console
 
-### Access to Swagger
+### 7. Access to Swagger
 
 Once the application is running, you can access the Swagger documentation through the following URL in your browser:
 
@@ -109,11 +111,11 @@ Once the application is running, you can access the Swagger documentation throug
   http://localhost:8080/swagger-ui/index.html
  ```
 
-### Test from Postman
+### 8. [Test from Postman](doc/usersmanager.postman_collection.json)
 
 Import the Postman collection provided in the doc folder with the name `usersmanager.postman_collection.json` to test
 the API endpoints.
 
-### Test to Endpoints
+### [9. DB Diagram](doc/UserManaganerDB.drawio.png)
 
-### Solution Diagram
+### [10. Solution Diagram](doc/UsersManagerDiagramSolution.drawio.png)
